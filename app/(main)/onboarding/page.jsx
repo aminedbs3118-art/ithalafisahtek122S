@@ -38,66 +38,7 @@ import { doctorFormSchema } from "@/lib/schema";
 import { SPECIALTIES } from "@/lib/specialities";
 
 import useFetch from "@/hooks/use-fetch";
-const ALGERIA_WILAYAS = [
-  "أدرار",
-  "الشلف",
-  "الأغواط",
-  "أم البواقي",
-  "باتنة",
-  "بجاية",
-  "بسكرة",
-  "بشار",
-  "البليدة",
-  "البويرة",
-  "تمنراست",
-  "تبسة",
-  "تلمسان",
-  "تيارت",
-  "تيزي وزو",
-  "الجزائر",
-  "الجلفة",
-  "جيجل",
-  "سطيف",
-  "سعيدة",
-  "سكيكدة",
-  "سيدي بلعباس",
-  "عنابة",
-  "قالمة",
-  "قسنطينة",
-  "المدية",
-  "مستغانم",
-  "المسيلة",
-  "معسكر",
-  "ورقلة",
-  "وهران",
-  "البيض",
-  "إليزي",
-  "برج بوعريريج",
-  "بومرداس",
-  "الطارف",
-  "تندوف",
-  "تيسمسيلت",
-  "الوادي",
-  "خنشلة",
-  "سوق أهراس",
-  "تيبازة",
-  "ميلة",
-  "عين الدفلى",
-  "النعامة",
-  "عين تموشنت",
-  "غرداية",
-  "غليزان",
-  "تيميمون",
-  "برج باجي مختار",
-  "أولاد جلال",
-  "بني عباس",
-  "عين صالح",
-  "عين قزام",
-  "تقرت",
-  "جانت",
-  "المغير",
-  "المنيعة",
-];
+
 export default function OnboardingPage() {
   const [step, setStep] = useState("choose-role");
   const router = useRouter();
@@ -298,38 +239,27 @@ export default function OnboardingPage() {
             </div>
 
             {/* الموقع */}
-           {/* الولاية */}
-<div className="space-y-2">
-  <Label htmlFor="location">
-    الولاية
-  </Label>
+            <div className="space-y-2">
+              <Label htmlFor="location">
+                الموقع أو الولاية
+              </Label>
 
-  <Select
-    value={watch("location")}
-    onValueChange={(value) =>
-      setValue("location", value)
-    }
-  >
-    <SelectTrigger id="location">
-      <SelectValue placeholder="اختر ولايتك" />
-    </SelectTrigger>
+              <div className="relative">
+                <MapPin className="absolute right-3 top-3 h-5 w-5 text-blue-500" />
 
-    <SelectContent>
-      {ALGERIA_WILAYAS.map((wilaya) => (
-        <SelectItem
-          key={wilaya}
-          value={wilaya}
-        >
-          {wilaya}
-        </SelectItem>
-      ))}
-    </SelectContent>
-  </Select>
+                <Input
+                  id="location"
+                  type="text"
+                  placeholder="مثال: الجزائر العاصمة"
+                  className="pr-10"
+                  {...register("location")}
+                />
+              </div>
 
-  <p className="text-sm text-gray-500">
-    هذه المعلومة للعرض فقط ولن يتم حفظها في قاعدة البيانات
-  </p>
-</div>
+              <p className="text-sm text-gray-500">
+                هذه الخانة للواجهة فقط ولن يتم حفظها في قاعدة البيانات
+              </p>
+            </div>
 
             {/* سنوات الخبرة */}
             <div className="space-y-2">
