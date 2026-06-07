@@ -237,7 +237,37 @@ export default function OnboardingPage() {
                 </p>
               )}
             </div>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  {/* الاسم */}
+  <div className="space-y-2">
+    <Label htmlFor="firstName">
+      الاسم
+    </Label>
 
+    <Input
+      id="firstName"
+      type="text"
+      placeholder="أدخل الاسم"
+    />
+  </div>
+
+  {/* اللقب */}
+  <div className="space-y-2">
+    <Label htmlFor="lastName">
+      اللقب
+    </Label>
+
+    <Input
+      id="lastName"
+      type="text"
+      placeholder="أدخل اللقب"
+    />
+  </div>
+</div>
+
+<p className="text-sm text-gray-500">
+  هذه المعلومات للواجهة فقط ولن يتم حفظها في قاعدة البيانات
+</p>
             {/* الموقع */}
             <div className="space-y-2">
               <Label htmlFor="location">
