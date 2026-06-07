@@ -135,14 +135,14 @@ const Pricing = () => {
 
             <div className="flex flex-col md:flex-row justify-center gap-4">
               <a
-                href="tel:+213555555555"
+                href="tel:+213799762819"
                 className="px-6 py-3 rounded-xl bg-blue-600 text-white font-medium"
               >
                 📞 اتصل بنا
               </a>
 
               <a
-                href="https://wa.me/213555555555"
+                href="https://wa.me/213799762819"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 rounded-xl bg-green-600 text-white font-medium"
@@ -151,7 +151,7 @@ const Pricing = () => {
               </a>
 
               <a
-                href="mailto:support@example.com"
+                href="mailto:athalafisahtek@gmail.com"
                 className="px-6 py-3 rounded-xl border font-medium"
               >
                 ✉️ البريد الإلكتروني
@@ -159,8 +159,8 @@ const Pricing = () => {
             </div>
 
             <div className="mt-6 text-gray-500">
-              <p>الهاتف: +213 555 55 55 55</p>
-              <p>البريد الإلكتروني: support@example.com</p>
+              <p>الهاتف 0799762819</p>
+              <p>البريد الإلكتروني: athalafisahtek@gmail.com</p>
             </div>
           </div>
         </div>
