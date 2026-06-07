@@ -194,10 +194,226 @@ export default function OnboardingPage() {
             </CardDescription>
           </div>
 
-          <form
-            onSubmit={handleSubmit(onDoctorSubmit)}
-            className="space-y-6"
+        <form
+  onSubmit={handleSubmit(onDoctorSubmit)}
+  className="space-y-6"
+>
+  {/* المعلومات الشخصية */}
+  <Card className="border-blue-100 bg-blue-50/30">
+    <CardContent className="pt-4">
+      <div className="flex items-center gap-2 mb-4">
+        <User className="h-5 w-5 text-blue-600" />
+        <h3 className="text-lg font-semibold text-blue-700">
+          المعلومات الشخصية
+        </h3>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* الاسم */}
+        <div className="space-y-2">
+          <Label htmlFor="firstName">
+            الاسم
+          </Label>
+
+          <Input
+            id="firstName"
+            type="text"
+            placeholder="أدخل الاسم"
+          />
+        </div>
+
+        {/* اللقب */}
+        <div className="space-y-2">
+          <Label htmlFor="lastName">
+            اللقب
+          </Label>
+
+          <Input
+            id="lastName"
+            type="text"
+            placeholder="أدخل اللقب"
+          />
+        </div>
+      </div>
+
+      {/* رقم التعريف */}
+      <div className="space-y-2 mt-4">
+        <Label htmlFor="nationalId">
+          رقم التعريف الوطني
+        </Label>
+
+        <Input
+          id="nationalId"
+          type="text"
+          placeholder="أدخل رقم التعريف الوطني"
+        />
+      </div>
+
+      <p className="text-sm text-gray-500 mt-3">
+        هذه المعلومات للواجهة فقط ولن يتم حفظها في قاعدة البيانات
+      </p>
+    </CardContent>
+  </Card>
+
+  {/* التخصص */}
+  <div className="space-y-2">
+    <Label htmlFor="specialty">
+      التخصص الطبي
+    </Label>
+
+    <Select
+      value={specialtyValue}
+      onValueChange={(value) =>
+        setValue("specialty", value)
+      }
+    >
+      <SelectTrigger id="specialty">
+        <SelectValue placeholder="اختر تخصصك" />
+      </SelectTrigger>
+
+      <SelectContent>
+        {SPECIALTIES.map((spec) => (
+          <SelectItem
+            key={spec.name}
+            value={spec.name}
+            className="flex items-center gap-2"
           >
+            <span className="text-blue-600">
+              {spec.icon}
+            </span>
+
+            {spec.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+
+    {errors.specialty && (
+      <p className="text-sm font-medium text-red-500 mt-1">
+        {errors.specialty.message}
+      </p>
+    )}
+  </div>
+
+  {/* الموقع */}
+  <div className="space-y-2">
+    <Label htmlFor="location">
+      الموقع أو الولاية
+    </Label>
+
+    <div className="relative">
+      <MapPin className="absolute right-3 top-3 h-5 w-5 text-blue-500" />
+
+      <Input
+        id="location"
+        type="text"
+        placeholder="مثال: الجزائر العاصمة"
+        className="pr-10"
+        {...register("location")}
+      />
+    </div>
+
+    <p className="text-sm text-gray-500">
+      هذه الخانة للواجهة فقط ولن يتم حفظها في قاعدة البيانات
+    </p>
+  </div>
+
+  {/* سنوات الخبرة */}
+  <div className="space-y-2">
+    <Label htmlFor="experience">
+      سنوات الخبرة
+    </Label>
+
+    <Input
+      id="experience"
+      type="number"
+      placeholder="مثال: 5"
+      {...register("experience", {
+        valueAsNumber: true,
+      })}
+    />
+
+    {errors.experience && (
+      <p className="text-sm font-medium text-red-500 mt-1">
+        {errors.experience.message}
+      </p>
+    )}
+  </div>
+
+  {/* رابط الشهادة */}
+  <div className="space-y-2">
+    <Label htmlFor="credentialUrl">
+      رابط الشهادة أو الوثيقة الطبية
+    </Label>
+
+    <Input
+      id="credentialUrl"
+      type="url"
+      placeholder="https://example.com/document.pdf"
+      {...register("credentialUrl")}
+    />
+
+    {errors.credentialUrl && (
+      <p className="text-sm font-medium text-red-500 mt-1">
+        {errors.credentialUrl.message}
+      </p>
+    )}
+
+    <p className="text-sm text-gray-500">
+      يرجى إضافة رابط لشهادتك الطبية أو اعتمادك المهني
+    </p>
+  </div>
+
+  {/* وصف الخدمات */}
+  <div className="space-y-2">
+    <Label htmlFor="description">
+      وصف الخدمات الطبية
+    </Label>
+
+    <Textarea
+      id="description"
+      placeholder="قم بوصف خبراتك الطبية والخدمات التي تقدمها وطريقتك في رعاية المرضى..."
+      rows="4"
+      {...register("description")}
+    />
+
+    {errors.description && (
+      <p className="text-sm font-medium text-red-500 mt-1">
+        {errors.description.message}
+      </p>
+    )}
+  </div>
+
+  {/* الأزرار */}
+  <div className="pt-2 flex items-center justify-between">
+    <Button
+      type="button"
+      variant="outline"
+      onClick={() =>
+        setStep("choose-role")
+      }
+      className="border-blue-300 text-blue-700 hover:bg-blue-50"
+      disabled={loading}
+    >
+      رجوع
+    </Button>
+
+    <Button
+      type="submit"
+      className="bg-blue-600 hover:bg-blue-700 text-white"
+      disabled={loading}
+    >
+      {loading ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          جاري الإرسال...
+        </>
+      ) : (
+        "إرسال للمراجعة"
+      )}
+    </Button>
+  </div>
+</form>
             {/* التخصص */}
             <div className="space-y-2">
               <Label htmlFor="specialty">
